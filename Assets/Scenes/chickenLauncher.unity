@@ -546,7 +546,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.78, y: -5.6, z: -10}
+  m_LocalPosition: {x: 0.1, y: -6.68, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000001dccd69a
+  m_ApplyToSortingLayers: 000000001dccd69a838b9842
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -793,15 +793,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5464184324589048535, guid: f19732f7cb0ead243a69e13af94bcd03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0562003
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5464184324589048535, guid: f19732f7cb0ead243a69e13af94bcd03, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -32.39192
+      value: -32.33
       objectReference: {fileID: 0}
     - target: {fileID: 5464184324589048535, guid: f19732f7cb0ead243a69e13af94bcd03, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.10601976
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5464184324589048535, guid: f19732f7cb0ead243a69e13af94bcd03, type: 3}
       propertyPath: m_LocalRotation.w
@@ -988,7 +988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5464184324589048535, guid: f19732f7cb0ead243a69e13af94bcd03, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.10601976
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5464184324589048535, guid: f19732f7cb0ead243a69e13af94bcd03, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1254,6 +1254,8 @@ GameObject:
   - component: {fileID: 2054980859}
   - component: {fileID: 2054980858}
   - component: {fileID: 2054980857}
+  - component: {fileID: 2054980860}
+  - component: {fileID: 2054980861}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Untagged
@@ -1329,8 +1331,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1117293443
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -7941936156974729709, guid: 5157fb49c4048f949bb0e23697435d34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1358,6 +1360,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2054980860
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054980856}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b2d7329e2f0ada74399e31e2100abc67, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!60 &2054980861
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054980856}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.13, y: 0.13}
+    newSize: {x: 0.13, y: 0.13}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.044999998, y: 0.065}
+      - {x: -0.065, y: 0.044999998}
+      - {x: -0.065, y: -0.065}
+      - {x: 0.065, y: -0.065}
+      - {x: 0.065, y: 0.035}
+      - {x: 0.024999999, y: 0.065}
+  m_UseDelaunayMesh: 0
 --- !u!1 &2129562492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,7 +1548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5464184324589048535, guid: f19732f7cb0ead243a69e13af94bcd03, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.10601976
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5464184324589048535, guid: f19732f7cb0ead243a69e13af94bcd03, type: 3}
       propertyPath: m_LocalRotation.w
