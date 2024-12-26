@@ -1,7 +1,8 @@
+using DefaultNamespace;
 using DG.Tweening;
 using UnityEngine;
 
-public class ChickenManager: MonoBehaviour 
+public class Chicken: MonoBehaviour, IPoolable
 {
     [SerializeField] private LayerMask rayLaser;
     [SerializeField] private float rayDistance = 5;
@@ -42,6 +43,21 @@ public class ChickenManager: MonoBehaviour
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
             _animator.SetTrigger("OnHit");
+            ChickenPool.instance.Return(this);
         }
+    }
+
+    public void Launch(Vector2 force, float torque)
+    {
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.AddForce(force);
+        rb.AddTorque(torque);
+    }
+    public void Reset()
+    {
+        rb.linearVelocity = Vector2.zero;
+        rb.rotation = 0;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        _rayHit = false;        
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IPoolable
     {
-        public void reset();
+        public void Reset();
     }
 }
