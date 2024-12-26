@@ -29,7 +29,7 @@ public class ChickenManager: MonoBehaviour
             _rayDirection = transform.up;
             if (Physics2D.Raycast(_rayOrigin, _rayDirection, rayDistance, rayLaser))
             {
-                //sound BAK
+                FindAnyObjectByType<SoundManager>().Play("Ray Bak");
                 transform.DOPunchScale(new Vector3(1, 1, 1), 0.5f);
                 _rayHit = true;
             } 
