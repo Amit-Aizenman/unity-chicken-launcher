@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DefaultNamespace;
 using DG.Tweening;
 using UnityEngine;
@@ -13,9 +14,9 @@ public class Chicken: MonoBehaviour, IPoolable
     private Animator _animator;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animator = this.GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         _rayHit = false;
         
@@ -41,23 +42,33 @@ public class Chicken: MonoBehaviour, IPoolable
     {
         if (other.gameObject.layer == 6)
         {
+            rb.linearVelocity = Vector2.zero;
+            rb.totalTorque = 0;
             rb.bodyType = RigidbodyType2D.Kinematic;
+            
             _animator.SetTrigger("OnHit");
-            ChickenPool.instance.Return(this);
+            Invoke("returnChicken", 0.4f);
         }
     }
 
-    public void Launch(Vector2 force, float torque)
+    public void Launch(float forceAngle, float force, float torque)
     {
         rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.AddForce(force);
         rb.AddTorque(torque);
+        Vector3 dir = Quaternion.AngleAxis(forceAngle, Vector3.forward) * Vector3.right;
+        rb.AddForce(dir*force);
     }
     public void Reset()
     {
         rb.linearVelocity = Vector2.zero;
         rb.rotation = 0;
         rb.bodyType = RigidbodyType2D.Dynamic;
-        _rayHit = false;        
+        _rayHit = false;
+        transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    private void returnChicken()
+    {
+        ChickenPool.instance.Return(this);
     }
 }
