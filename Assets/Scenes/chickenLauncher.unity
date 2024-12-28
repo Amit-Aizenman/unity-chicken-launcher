@@ -979,8 +979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d64526f182b2b48b7a5ce37f59e37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceResolution: {x: 1920, y: 1080}
-  mainCamera: {fileID: 519420031}
+  cam: {fileID: 0}
+  width: 18
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0

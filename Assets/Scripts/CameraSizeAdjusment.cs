@@ -1,48 +1,45 @@
 using System;
 using UnityEngine;
 
-public class CameraSizeAdjustment : MonoBehaviour
+public class FitCameraToWorldWidth : MonoBehaviour
 {
-    private const float PixelsToWorldUnitFactor = 200f;
+    private const float RatioChangeThreshold = 0.01f;
 
-    [SerializeField] private Vector2 referenceResolution = new Vector2(1920, 1080);
-    [SerializeField] private Camera mainCamera;
-    private float _currentRatio;
+    [SerializeField] private Camera cam;
+    [Header("How many world Unity units fit into the screen width")]
+    [SerializeField] private float width = 10f;
+    private float _currRatio;
 
-
-    private float TargetRatio => referenceResolution.x / referenceResolution.y;
-
+    private void Awake()
+    {
+        if (cam == null)
+            cam = Camera.main;
+        
+        if (!cam.orthographic) 
+            Debug.LogWarning("Camera is not orthographic, this script is designed for orthographic cameras");
+    }
 
     private void Start()
     {
-        _currentRatio = (float)Screen.width / Screen.height;
-        FitToScreenSize();
+        _currRatio = (float)Screen.width / Screen.height;
+        FitToWidth();
     }
 
     private void Update()
     {
-        var prevRatio = _currentRatio;
         var newRatio = (float)Screen.width / Screen.height;
-        if (Math.Abs(prevRatio - newRatio) > 0.01f) 
-            FitToScreenSize();
-
-        _currentRatio = newRatio;
+        if (Math.Abs(newRatio - _currRatio) > RatioChangeThreshold)
+        {
+            _currRatio = newRatio;
+            FitToWidth();
+        }
     }
 
-    private void FitToScreenSize()
+    private void FitToWidth()
     {
-        var scaledHeight = referenceResolution.x / _currentRatio;
-        
-        // Screen became wider than we want
-        if (_currentRatio >= TargetRatio)
-        {
-            mainCamera.orthographicSize = referenceResolution.y / PixelsToWorldUnitFactor;
-        }
-        
-        // Screen became taller than we want
-        else
-        {
-            mainCamera.orthographicSize = scaledHeight / PixelsToWorldUnitFactor;
-        }
+        var currHeight = cam.orthographicSize * 2f;
+        var currWidth = currHeight * _currRatio;
+        var ratioChange = width / currWidth;
+        cam.orthographicSize *= ratioChange;
     }
 }
