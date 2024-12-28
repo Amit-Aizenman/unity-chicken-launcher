@@ -6,6 +6,7 @@ public class ChickenSpawner : MonoBehaviour
     [SerializeField] private float chickensPerSecond;
     [SerializeField] private Button fasterButton;
     [SerializeField] private Button slowerButton;
+    [SerializeField] private SpawnedChicken chickenSpawnerTracker;
     private float _timeSinceLastSpawn;
     private float _randomLaunchAngle;
     private float _randomLaunchForce;
@@ -30,6 +31,8 @@ public class ChickenSpawner : MonoBehaviour
             _randomLaunchForce = Random.Range(400f, 500f);
             _randomToruqe = Random.Range(10f, 30f);
             chicken.Launch(_randomLaunchAngle, _randomLaunchForce, _randomToruqe);
+            chickenSpawnerTracker.IncerementChickenCounter();
+            
 
         }
     }

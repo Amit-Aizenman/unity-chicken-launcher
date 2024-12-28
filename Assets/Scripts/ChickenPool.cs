@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class ChickenPool : MonoPool<Chicken>
 {
     public static ChickenPool instance;
+    [SerializeField] private CurrentChicken currentChicken;
     void Awake()
     {
         if (instance == null)
@@ -13,5 +15,10 @@ public class ChickenPool : MonoPool<Chicken>
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        currentChicken.UpdateCurrentChicken(getActiveElements());
     }
 }

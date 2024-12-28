@@ -9,6 +9,7 @@ public class MonoPool<T> : MonoBehaviour where T: MonoBehaviour, IPoolable
     [SerializeField] private T prefab;
     [SerializeField] private Transform parent;
     private Stack<T> _available = new();
+    private int _activeElements = 0;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class MonoPool<T> : MonoBehaviour where T: MonoBehaviour, IPoolable
         }
         var pooledObject = _available.Pop();
         pooledObject.gameObject.SetActive(true);
+        _activeElements++;
         
         pooledObject.Reset();
 
@@ -32,6 +34,7 @@ public class MonoPool<T> : MonoBehaviour where T: MonoBehaviour, IPoolable
     public void Return(T obj)
     {
         obj.gameObject.SetActive(false);
+        _activeElements--;
         _available.Push(obj);
     }
     
@@ -47,5 +50,10 @@ public class MonoPool<T> : MonoBehaviour where T: MonoBehaviour, IPoolable
             obj.gameObject.SetActive(false);
             _available.Push(obj);
         }
+    }
+
+    public int getActiveElements()
+    {
+        return _activeElements;
     }
 }
