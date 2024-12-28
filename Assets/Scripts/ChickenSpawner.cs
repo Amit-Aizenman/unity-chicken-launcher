@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChickenSpawner : MonoBehaviour
 {
     [SerializeField] private float chickensPerSecond;
+    [SerializeField] private Button fasterButton;
+    [SerializeField] private Button slowerButton;
     private float _timeSinceLastSpawn;
     private float _randomLaunchAngle;
     private float _randomLaunchForce;
@@ -29,5 +32,31 @@ public class ChickenSpawner : MonoBehaviour
             chicken.Launch(_randomLaunchAngle, _randomLaunchForce, _randomToruqe);
 
         }
+    }
+    
+    private void OnEnable()
+    {
+        fasterButton.onClick.AddListener(FasterButtonClicked);
+        slowerButton.onClick.AddListener(SlowerButtonClicked);
+    }
+
+    private void OnDisable()
+    {
+        fasterButton.onClick.RemoveListener(FasterButtonClicked);
+        slowerButton.onClick.RemoveListener(SlowerButtonClicked);
+    }
+
+    private void FasterButtonClicked()
+    {
+        if (chickensPerSecond == 0)
+            chickensPerSecond = 1f;
+        else
+            chickensPerSecond *= 1.5f;
+    }
+
+    private void SlowerButtonClicked()
+    {
+        chickensPerSecond /= 1.5f;
+
     }
 }
