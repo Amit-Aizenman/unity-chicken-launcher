@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class ChickenSpawner : MonoBehaviour
 {
-    [SerializeField] private float chickensPerSecond;
+    public static float initialChickentPerSecond = 3;
+    public static float ChickensPerSecond;
     [SerializeField] private Button fasterButton;
     [SerializeField] private Button slowerButton;
     [SerializeField] private SpawnedChicken chickenSpawnerTracker;
@@ -16,16 +17,17 @@ public class ChickenSpawner : MonoBehaviour
     {
         
         _timeSinceLastSpawn = 0f;
+        ChickensPerSecond = initialChickentPerSecond;
     }
 
     // Update is called once per frame
     void Update()
     {
         _timeSinceLastSpawn += Time.deltaTime;
-        if (_timeSinceLastSpawn >= 1 / chickensPerSecond)
+        if (_timeSinceLastSpawn >= 1 / ChickensPerSecond)
         {
             _timeSinceLastSpawn = 0f;
-            var chicken = ChickenPool.instance.Get();
+            var chicken = ChickenPool.Instance.Get();
             FindAnyObjectByType<SoundManager>().Play("ChickenSpawned", true, true);
             chicken.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
             _randomLaunchAngle = Random.Range(45f, 160f);
@@ -52,15 +54,14 @@ public class ChickenSpawner : MonoBehaviour
 
     private void FasterButtonClicked()
     {
-        if (chickensPerSecond == 0)
-            chickensPerSecond = 1f;
+        if (ChickensPerSecond == 0)
+            ChickensPerSecond = 1f;
         else
-            chickensPerSecond *= 1.5f;
+            ChickensPerSecond *= 1.5f;
     }
 
     private void SlowerButtonClicked()
     {
-        chickensPerSecond /= 1.5f;
-
+        ChickensPerSecond /= 1.5f;
     }
 }

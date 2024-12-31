@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using IPoolable = DefaultNamespace.IPoolable;
 
 public class MonoPool<T> : MonoBehaviour where T: MonoBehaviour, IPoolable
@@ -52,8 +53,25 @@ public class MonoPool<T> : MonoBehaviour where T: MonoBehaviour, IPoolable
         }
     }
 
-    public int getActiveElements()
+    public int GetActiveElements()
     {
         return _activeElements;
     }
+    
+    private void OnEnable()
+    {
+        GameEvents.DestroyAllChickens += ResetActiveElements;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.DestroyAllChickens -= ResetActiveElements;
+    }
+
+    private void ResetActiveElements(int reset)
+    {
+        _activeElements = reset;
+    }
+
+
 }

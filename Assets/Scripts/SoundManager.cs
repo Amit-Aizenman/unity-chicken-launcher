@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour
 {
     public Sound[] sounds;
     public static SoundManager Instance;
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -52,7 +52,6 @@ public class SoundManager : MonoBehaviour
         {
             s.source.spatialBlend = 0f;
         }
-        Debug.Log("playing " +name);
         s.source.Play();
     }
 }

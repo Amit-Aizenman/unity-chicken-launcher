@@ -12,17 +12,16 @@ public class Chicken: MonoBehaviour, IPoolable
     private Vector2 _rayDirection;
     private bool _rayHit;
     private Animator _animator;
+    private bool _destroyFlag;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         _animator = this.GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         _rayHit = false;
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!_rayHit)
@@ -42,13 +41,7 @@ public class Chicken: MonoBehaviour, IPoolable
     {
         if (other.gameObject.layer == 6)
         {
-            rb.linearVelocity = Vector2.zero;
-            rb.totalTorque = 0;
-            rb.bodyType = RigidbodyType2D.Kinematic;
-
-            _animator.SetTrigger("OnHit");
-            FindAnyObjectByType<SoundManager>().Play("Explosion", false, true);
-            Invoke("returnChicken", 0.4f);
+            DestoryChicken(0);
         }
     }
 
@@ -58,6 +51,9 @@ public class Chicken: MonoBehaviour, IPoolable
         rb.AddTorque(torque);
         Vector3 dir = Quaternion.AngleAxis(forceAngle, Vector3.forward) * Vector3.right;
         rb.AddForce(dir*force);
+        CurrentChicken.CurrenChickenCounter++;
+
+        
     }
     public void Reset()
     {
@@ -66,10 +62,37 @@ public class Chicken: MonoBehaviour, IPoolable
         rb.bodyType = RigidbodyType2D.Dynamic;
         _rayHit = false;
         transform.localScale = new Vector3(1, 1, 1);
+        _destroyFlag = false;
     }
 
-    private void returnChicken()
+    private void ReturnChicken()
     {
-        ChickenPool.instance.Return(this);
+        ChickenPool.Instance.Return(this);
     }
+
+    private void DestoryChicken(int reset)
+    {
+        if (_destroyFlag == false)
+        {
+            _destroyFlag = true;
+            rb.linearVelocity = Vector2.zero;
+            rb.totalTorque = 0;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            _animator.SetTrigger("OnHit");
+            FindAnyObjectByType<SoundManager>().Play("Explosion", false, true);
+            Invoke("ReturnChicken", 0.4f);
+            CurrentChicken.CurrenChickenCounter--;
+        }
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.DestroyAllChickens += DestoryChicken;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.DestroyAllChickens -= DestoryChicken;
+    }
+    
 }

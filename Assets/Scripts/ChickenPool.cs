@@ -1,24 +1,17 @@
-using System;
 using UnityEngine;
 
 public class ChickenPool : MonoPool<Chicken>
 {
-    public static ChickenPool instance;
-    [SerializeField] private CurrentChicken currentChicken;
-    void Awake()
+    public static ChickenPool Instance;
+    private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Update()
-    {
-        currentChicken.UpdateCurrentChicken(getActiveElements());
     }
 }

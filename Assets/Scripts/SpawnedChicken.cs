@@ -11,4 +11,20 @@ public class SpawnedChicken : MonoBehaviour
         counter++;
         myTextElement.text = counter.ToString();
     }
+    
+    private void OnEnable()
+    {
+        GameEvents.DestroyAllChickens += ResetChickenCounter;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.DestroyAllChickens -= ResetChickenCounter;
+    }
+
+    private void ResetChickenCounter(int reset)
+    {
+        counter = reset;
+        myTextElement.text = "0";
+    }
 }

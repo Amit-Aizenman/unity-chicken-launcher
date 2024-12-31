@@ -6,6 +6,7 @@ TagManager:
   tags:
   - UpButton
   - DownButton
+  - Chicken
   layers:
   - Default
   - TransparentFX
