@@ -28,7 +28,7 @@ public class Chicken: MonoBehaviour, IPoolable
         if (!_rayHit)
         {
             _rayOrigin = transform.position;
-            _rayDirection = transform.up;
+            _rayDirection = rb.linearVelocity;
             if (Physics2D.Raycast(_rayOrigin, _rayDirection, rayDistance, rayLaser))
             {
                 FindAnyObjectByType<SoundManager>().Play("Ray Bak", true, true);
