@@ -26,6 +26,7 @@ public class ChickenSpawner : MonoBehaviour
         {
             _timeSinceLastSpawn = 0f;
             var chicken = ChickenPool.instance.Get();
+            FindAnyObjectByType<SoundManager>().Play("ChickenSpawned", true, true);
             chicken.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
             _randomLaunchAngle = Random.Range(45f, 160f);
             _randomLaunchForce = Random.Range(400f, 500f);

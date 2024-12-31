@@ -2212,23 +2212,31 @@ MonoBehaviour:
   sounds:
   - name: Ray Bak
     clip: {fileID: 8300000, guid: aa88dd00599bbca4a918892908fb57f8, type: 3}
-    volume: 0.814
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 1
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
+  - name: ChickenSpawned
+    clip: {fileID: 8300000, guid: c7b1f8bab9285bb458f02c7ddb497c59, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 1
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
+  - name: Background
+    clip: {fileID: 8300000, guid: bf16bbfeee6f97e43978b8fd754a01bc, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    spatialBlend: 0
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
+  - name: Explosion
+    clip: {fileID: 8300000, guid: be30168d961920e46bd7c68803c53b6e, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    spatialBlend: 1
     source: {fileID: 0}
 --- !u!4 &1254220603
 Transform:

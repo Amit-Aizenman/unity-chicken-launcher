@@ -31,7 +31,7 @@ public class Chicken: MonoBehaviour, IPoolable
             _rayDirection = transform.up;
             if (Physics2D.Raycast(_rayOrigin, _rayDirection, rayDistance, rayLaser))
             {
-                FindAnyObjectByType<SoundManager>().Play("Ray Bak");
+                FindAnyObjectByType<SoundManager>().Play("Ray Bak", true, true);
                 transform.DOPunchScale(new Vector3(1, 1, 1), 0.5f);
                 _rayHit = true;
             } 
@@ -45,8 +45,9 @@ public class Chicken: MonoBehaviour, IPoolable
             rb.linearVelocity = Vector2.zero;
             rb.totalTorque = 0;
             rb.bodyType = RigidbodyType2D.Kinematic;
-            
+
             _animator.SetTrigger("OnHit");
+            FindAnyObjectByType<SoundManager>().Play("Explosion", false, true);
             Invoke("returnChicken", 0.4f);
         }
     }

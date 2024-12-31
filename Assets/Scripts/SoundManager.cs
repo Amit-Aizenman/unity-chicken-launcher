@@ -1,16 +1,17 @@
 using System;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class SoundManager : MonoBehaviour
 {
     public Sound[] sounds;
-    public static SoundManager instance;
+    public static SoundManager Instance;
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -22,12 +23,36 @@ public class SoundManager : MonoBehaviour
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
             s.source.volume = s.volume;
+            s.source.loop = s.loop;
+            s.source.pitch = s.pitch;
+            s.source.spatialBlend = s.spatialBlend;
         }
     }
 
-    public void Play(string name)
+    void Start()
     {
+        Play(("Background"));
+    }
+
+    public void Play(string name, bool randomPitch = false, bool isSpacial = false)
+    {
+        
         Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (randomPitch)
+        {
+            s.pitch = Random.Range(0.8f, 1.2f);
+            s.source.pitch = s.pitch;
+        }
+
+        if (isSpacial)
+        {
+            s.source.spatialBlend = 1f;
+        }
+        else
+        {
+            s.source.spatialBlend = 0f;
+        }
+        Debug.Log("playing " +name);
         s.source.Play();
     }
 }
