@@ -4,12 +4,12 @@ using UnityEngine;
 public class SpawnedChicken : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI myTextElement;
-    private int counter = 0;
+    private int _counter;
     
     public void IncerementChickenCounter()
     {
-        counter++;
-        myTextElement.text = counter.ToString();
+        _counter++;
+        myTextElement.text = _counter.ToString();
     }
     
     private void OnEnable()
@@ -24,7 +24,7 @@ public class SpawnedChicken : MonoBehaviour
 
     private void ResetChickenCounter(int reset)
     {
-        counter = reset;
+        _counter = reset;
         myTextElement.text = "0";
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using IPoolable = DefaultNamespace.IPoolable;
 
 public class MonoPool<T> : MonoBehaviour where T: MonoBehaviour, IPoolable
@@ -10,7 +9,7 @@ public class MonoPool<T> : MonoBehaviour where T: MonoBehaviour, IPoolable
     [SerializeField] private T prefab;
     [SerializeField] private Transform parent;
     private Stack<T> _available = new();
-    private int _activeElements = 0;
+    private int _activeElements;
 
     private void Awake()
     {

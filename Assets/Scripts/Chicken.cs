@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using DefaultNamespace;
 using DG.Tweening;
 using UnityEngine;

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ChickenSpawner : MonoBehaviour
 {
-    public static float initialChickentPerSecond = 3;
+    public static float InitialChickentPerSecond = 3;
     public static float ChickensPerSecond;
     [SerializeField] private Button fasterButton;
     [SerializeField] private Button slowerButton;
@@ -17,7 +17,7 @@ public class ChickenSpawner : MonoBehaviour
     {
         
         _timeSinceLastSpawn = 0f;
-        ChickensPerSecond = initialChickentPerSecond;
+        ChickensPerSecond = InitialChickentPerSecond;
     }
 
     // Update is called once per frame

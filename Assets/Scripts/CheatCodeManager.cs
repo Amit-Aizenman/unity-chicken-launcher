@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class CheatCodeManager : MonoBehaviour
 {
@@ -23,12 +21,13 @@ public class CheatCodeManager : MonoBehaviour
             // 1 - Reset spawn rate 
         {
             Debug.Log("Resetting chickens spawn rate");
-            ChickenSpawner.ChickensPerSecond = ChickenSpawner.initialChickentPerSecond;
+            ChickenSpawner.ChickensPerSecond = ChickenSpawner.InitialChickentPerSecond;
         }
         
         if (Input.GetKeyDown(KeyCode.Alpha2))
             // 2 - Destroy all chickens and reset the counters
         {
+            Debug.Log("Destroying all chickens and resetting the counters");
             GameEvents.DestroyAllChickens?.Invoke(0);
             
         }
@@ -37,6 +36,7 @@ public class CheatCodeManager : MonoBehaviour
             // 3 - Reset the camera to its initial position
         {
             Debug.Log("Resetting the camera to initial position");
+            GameEvents.ResetCameraPosition?.Invoke(0);
         }
     }
 }
